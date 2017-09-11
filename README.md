@@ -1,2 +1,2 @@
 # jlib
-Library of handy Pure Data abstractions
+A library of handy Pure Data abstractions
