@@ -1,0 +1,159 @@
+#N canvas 1 66 712 731 10;
+#X obj 165 273 +~;
+#X obj 274 273 +~;
+#X obj 165 322 +~;
+#X obj 371 323 +~;
+#X obj 257 322 -~;
+#X obj 463 322 -~;
+#X obj 165 378 +~;
+#X obj 257 379 +~;
+#X obj 354 380 -~;
+#X obj 446 380 -~;
+#X obj 165 57 inlet~;
+#X obj 95 322 outlet~ r;
+#X obj 23 322 outlet~ l;
+#X obj 165 670 delwrite~ \$0-A 1000;
+#X obj 257 651 delwrite~ \$0-B 1000;
+#X obj 354 631 delwrite~ \$0-C 1000;
+#X obj 446 611 delwrite~ \$0-D 1000;
+#X obj 182 445 * 0.4;
+#X obj 275 465 * 0.37;
+#X obj 371 486 * 0.333;
+#X obj 463 505 * 0.3;
+#X obj 182 473 sig~;
+#X obj 182 501 lop~ 64;
+#X obj 275 493 sig~;
+#X obj 275 521 lop~ 64;
+#X obj 371 514 sig~;
+#X obj 371 542 lop~ 64;
+#X obj 463 533 sig~;
+#X obj 463 560 lop~ 64;
+#X obj 165 527 *~;
+#X obj 257 548 *~;
+#X obj 354 569 *~;
+#X obj 446 589 *~;
+#X obj 182 225 lop~ 64;
+#X obj 292 225 lop~ 64;
+#X obj 371 255 lop~ 64;
+#X obj 479 254 lop~ 64;
+#X obj 182 197 sig~ 101;
+#X obj 292 197 sig~ 143;
+#X obj 479 227 sig~ 177;
+#X obj 182 245 vd~ \$0-A;
+#X obj 291 247 vd~ \$0-B;
+#X obj 372 279 vd~ \$0-C;
+#X obj 480 280 vd~ \$0-D;
+#X obj 182 174 * 101;
+#X obj 292 174 * 143;
+#X obj 371 204 * 165;
+#X obj 479 203 * 177;
+#X obj 371 227 sig~ 165;
+#X obj 371 127 clip 0.01 1;
+#X obj 481 53 inlet decay;
+#X obj 371 53 inlet roomSize;
+#X obj 463 482 r \$0-decay;
+#X obj 371 460 r \$0-decay;
+#X obj 275 440 r \$0-decay;
+#X obj 182 419 r \$0-decay;
+#X obj 481 162 s \$0-decay;
+#X obj 481 141 clip 0.01 1.3;
+#X obj 382 79 loadbang;
+#X obj 382 102 1;
+#X obj 492 120 1;
+#X obj 481 93 * 1.3;
+#X text 161 22 REVERB - courtesy of Obiwannabe;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 34 73 pd LICENCE;
+#X connect 0 0 2 0;
+#X connect 0 0 4 0;
+#X connect 0 0 12 0;
+#X connect 1 0 2 1;
+#X connect 1 0 4 1;
+#X connect 1 0 11 0;
+#X connect 2 0 6 0;
+#X connect 2 0 8 0;
+#X connect 3 0 8 1;
+#X connect 3 0 6 1;
+#X connect 4 0 7 0;
+#X connect 4 0 9 0;
+#X connect 5 0 7 1;
+#X connect 5 0 9 1;
+#X connect 6 0 29 0;
+#X connect 7 0 30 0;
+#X connect 8 0 31 0;
+#X connect 9 0 32 0;
+#X connect 10 0 0 0;
+#X connect 10 0 1 0;
+#X connect 17 0 21 0;
+#X connect 18 0 23 0;
+#X connect 19 0 25 0;
+#X connect 20 0 27 0;
+#X connect 21 0 22 0;
+#X connect 22 0 29 1;
+#X connect 23 0 24 0;
+#X connect 24 0 30 1;
+#X connect 25 0 26 0;
+#X connect 26 0 31 1;
+#X connect 27 0 28 0;
+#X connect 28 0 32 1;
+#X connect 29 0 13 0;
+#X connect 30 0 14 0;
+#X connect 31 0 15 0;
+#X connect 32 0 16 0;
+#X connect 33 0 40 0;
+#X connect 34 0 41 0;
+#X connect 35 0 42 0;
+#X connect 36 0 43 0;
+#X connect 37 0 33 0;
+#X connect 38 0 34 0;
+#X connect 39 0 36 0;
+#X connect 40 0 0 1;
+#X connect 41 0 1 1;
+#X connect 42 0 5 0;
+#X connect 42 0 3 0;
+#X connect 43 0 5 1;
+#X connect 43 0 3 1;
+#X connect 44 0 37 0;
+#X connect 45 0 38 0;
+#X connect 46 0 48 0;
+#X connect 47 0 39 0;
+#X connect 48 0 35 0;
+#X connect 49 0 44 0;
+#X connect 49 0 45 0;
+#X connect 49 0 46 0;
+#X connect 49 0 47 0;
+#X connect 50 0 61 0;
+#X connect 51 0 49 0;
+#X connect 52 0 20 0;
+#X connect 53 0 19 0;
+#X connect 54 0 18 0;
+#X connect 55 0 17 0;
+#X connect 57 0 56 0;
+#X connect 58 0 59 0;
+#X connect 58 0 60 0;
+#X connect 59 0 49 0;
+#X connect 60 0 57 0;
+#X connect 61 0 57 0;

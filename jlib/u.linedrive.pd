@@ -1,0 +1,84 @@
+#N canvas 163 169 671 483 10;
+#X obj 96 222 \$3;
+#X obj 34 51 inlet x;
+#X text 236 103 y = b*e^(-a*log c)*e^(x*log c);
+#X text 236 85 y = \$2*e^(-\$1*log \$3)*e^(x*log \$3);
+#X obj 34 459 outlet y;
+#X obj 52 243 exp;
+#X obj 34 299 pow;
+#X obj 78 272 *;
+#X obj 96 244 log;
+#X obj 34 272 f;
+#X msg 52 222 1;
+#X obj 118 303 pow;
+#X obj 136 276 *;
+#X obj 172 251 log;
+#X obj 136 228 \$1;
+#X obj 136 250 * -1;
+#X obj 112 149 loadbang;
+#X obj 34 340 *;
+#X obj 112 180 t b b b b;
+#X text 236 67 Based on 'linedrive' from Max/MSP;
+#X text 203 424 J.R. Dooley \, Birmingham Conservatoire \, 2012;
+#X text 223 173 "linedrive takes float ranging from -[argument 1] to
++[argument 1] and scales them to fall within the range -[argument 2]
+to +[argument 2]. If the input equals argument 1 \, the output is equal
+to argument value 2 Output varies exponentially with the input depending
+on argument 3.";
+#X obj 34 387 pack f \$4;
+#X text 202 404 \$4 = time period to reach new value;
+#X obj 172 230 \$3;
+#X obj 34 365 * \$2;
+#X obj 34 112 t b f b;
+#X text 236 11 LINEDRIVE;
+#N canvas 749 115 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 545 24 pd LICENCE;
+#X connect 0 0 8 0;
+#X connect 1 0 26 0;
+#X connect 5 0 9 1;
+#X connect 5 0 11 0;
+#X connect 6 0 17 0;
+#X connect 7 0 6 1;
+#X connect 8 0 7 1;
+#X connect 9 0 6 0;
+#X connect 10 0 5 0;
+#X connect 11 0 17 1;
+#X connect 12 0 11 1;
+#X connect 13 0 12 1;
+#X connect 14 0 15 0;
+#X connect 15 0 12 0;
+#X connect 16 0 18 0;
+#X connect 17 0 25 0;
+#X connect 18 0 0 0;
+#X connect 18 1 10 0;
+#X connect 18 2 14 0;
+#X connect 18 3 24 0;
+#X connect 22 0 4 0;
+#X connect 24 0 13 0;
+#X connect 25 0 22 0;
+#X connect 26 0 9 0;
+#X connect 26 1 7 0;
+#X connect 26 2 18 0;

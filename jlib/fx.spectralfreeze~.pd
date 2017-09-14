@@ -1,0 +1,191 @@
+#N canvas 182 92 383 344 10;
+#X obj 104 48 inlet;
+#X msg 104 216 1;
+#X obj 104 138 bng 50 250 50 0 empty empty freeze 5 25 0 12 -203904
+-1 -1;
+#X obj 4 48 inlet~;
+#X obj 5 308 outlet~;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 281 48 pd LICENCE;
+#X obj 225 219 s \$0-init-bang;
+#N canvas 395 388 542 300 freezers 0;
+#N canvas 846 181 376 561 freezer 0;
+#X obj 35 161 rfft~;
+#X obj 38 287 rifft~;
+#X obj 251 348 block~ 1024;
+#X obj 34 129 *~;
+#X msg 251 323 set \$1 4;
+#X obj 35 24 inlet~;
+#X obj 36 517 outlet~;
+#X obj 182 52 table \$0-real1;
+#X obj 182 73 table \$0-imag1;
+#X obj 77 264 tabreceive~ \$0-imag1;
+#X obj 38 244 tabreceive~ \$0-real1;
+#X obj 52 102 tabreceive~ \$0-hann1;
+#N canvas 166 169 514 327 tabsend 0;
+#X obj 16 19 inlet~;
+#X obj 135 19 inlet~;
+#X obj 357 281 switch~;
+#X obj 267 19 inlet;
+#X obj 267 241 pipe;
+#X obj 306 132 / 44100;
+#X obj 267 85 t b b b;
+#X obj 306 159 * 1000;
+#X obj 267 60 sel 1;
+#X msg 267 212 0;
+#X msg 286 182 1;
+#X obj 357 18 inlet;
+#X msg 357 243 0;
+#X obj 134 73 tabsend~ \$0-imag1;
+#X obj 17 73 tabsend~ \$0-real1;
+#X obj 306 110 f 1024;
+#X connect 0 0 14 0;
+#X connect 1 0 13 0;
+#X connect 3 0 8 0;
+#X connect 4 0 2 0;
+#X connect 5 0 7 0;
+#X connect 6 0 9 0;
+#X connect 6 1 10 0;
+#X connect 6 2 15 0;
+#X connect 7 0 4 1;
+#X connect 8 0 6 0;
+#X connect 9 0 4 0;
+#X connect 10 0 2 0;
+#X connect 11 0 12 0;
+#X connect 12 0 2 0;
+#X connect 15 0 5 0;
+#X restore 36 196 pd tabsend;
+#X obj 103 171 r \$0-init-bang;
+#X obj 251 270 r \$0-init-bang;
+#X obj 91 24 inlet freeze;
+#X obj 83 310 r \$0-init-bang;
+#X obj 251 298 f 1024;
+#X obj 36 444 *~;
+#X obj 53 420 tabreceive~ \$0-hann1;
+#X obj 83 353 / 2;
+#X obj 83 375 * 3;
+#X obj 37 398 /~ 1536;
+#X obj 83 331 f 1024;
+#X connect 0 0 12 0;
+#X connect 0 1 12 1;
+#X connect 1 0 22 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 5 0 3 0;
+#X connect 9 0 1 1;
+#X connect 10 0 1 0;
+#X connect 11 0 3 1;
+#X connect 13 0 12 3;
+#X connect 14 0 17 0;
+#X connect 15 0 12 2;
+#X connect 16 0 23 0;
+#X connect 17 0 4 0;
+#X connect 18 0 6 0;
+#X connect 19 0 18 1;
+#X connect 20 0 21 0;
+#X connect 21 0 22 1;
+#X connect 22 0 18 0;
+#X connect 23 0 20 0;
+#X restore 43 129 pd freezer;
+#X obj 44 47 inlet~;
+#X obj 43 237 outlet~;
+#X obj 110 47 inlet;
+#X obj 186 131 pack f \$0;
+#X obj 186 73 r \$0-init-bang;
+#N canvas 607 262 485 424 hann-window 0;
+#N canvas 0 50 450 300 (subpatch) 0;
+#X array \$0-hann1 1024 float 0;
+#X coords 0 1 1023 0 300 100 1;
+#X restore 163 85 graph;
+#X obj 48 262 osc~;
+#X obj 48 287 *~ -0.5;
+#X obj 48 311 +~ 0.5;
+#X obj 49 131 samplerate~;
+#X obj 28 161 swap;
+#X obj 28 185 /;
+#X obj 28 55 t f b f;
+#X msg 67 80 resize \$1;
+#X msg 87 234 0;
+#X obj 28 8 inlet;
+#X obj 28 386 outlet;
+#X obj 49 339 tabwrite~ \$0-hann1;
+#X obj 67 104 s \$0-hann1;
+#X obj 48 208 t f b b;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 12 0;
+#X connect 4 0 5 1;
+#X connect 5 0 6 0;
+#X connect 5 1 6 1;
+#X connect 6 0 11 0;
+#X connect 6 0 14 0;
+#X connect 7 0 5 0;
+#X connect 7 1 4 0;
+#X connect 7 2 8 0;
+#X connect 8 0 13 0;
+#X connect 9 0 1 1;
+#X connect 10 0 7 0;
+#X connect 14 0 1 0;
+#X connect 14 1 12 0;
+#X connect 14 2 9 0;
+#X restore 258 130 pd hann-window;
+#X obj 186 104 f 1024;
+#X obj 370 75 r \$0-clear;
+#X obj 370 127 pack f \$0;
+#X obj 370 100 f 1024;
+#X msg 186 161 \; \$2-real1 resize \$1 \; \$2-imag1 resize \$1 \;;
+#X msg 370 152 \; \$2-real1 const 0 \; \$2-imag1 const 0 \; \$2-real1
+resize \$1 \; \$2-imag1 resize \$1 \;;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 3 0 0 1;
+#X connect 4 0 11 0;
+#X connect 5 0 7 0;
+#X connect 7 0 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 10 0;
+#X connect 9 0 12 0;
+#X connect 10 0 9 0;
+#X restore 5 249 pd freezers;
+#X obj 165 138 bng 50 250 50 0 empty empty clear 5 25 0 12 -232576
+-1 -1;
+#X obj 225 138 bng 50 250 50 0 empty empty reset 5 25 0 12 -258113
+-1 -1;
+#X text 11 13 Spectral Freeze with a fft window size of 1024;
+#X obj 165 244 s \$0-clear;
+#X obj 104 76 route bang clear windowSize reset;
+#X connect 0 0 12 0;
+#X connect 1 0 7 1;
+#X connect 2 0 1 0;
+#X connect 3 0 7 0;
+#X connect 7 0 4 0;
+#X connect 8 0 11 0;
+#X connect 9 0 6 0;
+#X connect 9 0 11 0;
+#X connect 12 0 2 0;
+#X connect 12 1 8 0;
+#X connect 12 3 9 0;
+#X coords 0 -1 1 1 180 90 1 100 100;

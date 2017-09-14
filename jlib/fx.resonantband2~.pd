@@ -1,0 +1,162 @@
+#N canvas 285 229 393 289 10;
+#N canvas 1 65 380 414 resonant 0;
+#X obj 66 8 inlet;
+#X obj 66 50 unpack f f f;
+#X obj 66 372 outlet;
+#X obj 66 332 pack f f f f 0 f;
+#X text 191 332 a0 a1 a2 b0 b1 b2;
+#X text 45 189 a0;
+#X text 72 135 a1;
+#X text 103 216 a2;
+#X text 219 245 b2;
+#X text 147 310 b1;
+#X text 160 208 b0;
+#X obj 66 189 + 1;
+#X obj 120 240 -;
+#X msg 120 217 1 \$1;
+#X obj 182 245 * -1;
+#X obj 106 133 expr -2*cos($f1);
+#X obj 182 209 expr $f1 * $f2;
+#X obj 66 159 t f f f;
+#X connect 0 0 1 0;
+#X connect 1 0 17 0;
+#X connect 1 1 15 0;
+#X connect 1 2 16 1;
+#X connect 3 0 2 0;
+#X connect 11 0 3 0;
+#X connect 12 0 3 2;
+#X connect 13 0 12 0;
+#X connect 14 0 3 5;
+#X connect 15 0 3 1;
+#X connect 16 0 14 0;
+#X connect 16 0 3 3;
+#X connect 17 0 11 0;
+#X connect 17 1 13 0;
+#X connect 17 2 16 0;
+#X restore 129 134 pd resonant;
+#N canvas 681 216 536 511 filter_prelim 0;
+#X obj 70 19 inlet frequency;
+#X obj 70 179 expr 6.28319*$f1/$f2;
+#X obj 207 104 samplerate~;
+#X obj 313 237 sin;
+#X obj 345 216 * 2;
+#X obj 151 131 / 2;
+#X obj 70 154 clip 1 22050;
+#X obj 345 181 max 1e-08;
+#X obj 313 264 / 1;
+#X obj 313 139 t b f;
+#X obj 313 23 inlet 'Q';
+#X obj 313 352 pack f f f;
+#X obj 313 444 outlet;
+#X msg 313 303 bang;
+#X obj 375 216 f 1;
+#X obj 313 216 f;
+#X obj 313 327 f;
+#X text 74 342 angular frequency \, alpha \, Q =>;
+#X obj 161 73 t b b b;
+#X msg 313 386 \$2 \$1 \$3;
+#X obj 70 131 f \$1;
+#X obj 313 108 f \$2;
+#X text 410 39 \$1 = frequency \; \$2 = 'Q';
+#X obj 160 52 loadbang;
+#X connect 0 0 20 0;
+#X connect 1 0 15 0;
+#X connect 1 0 16 0;
+#X connect 2 0 1 1;
+#X connect 2 0 5 0;
+#X connect 3 0 8 0;
+#X connect 4 0 8 1;
+#X connect 5 0 6 2;
+#X connect 6 0 1 0;
+#X connect 7 0 4 0;
+#X connect 7 0 14 0;
+#X connect 8 0 11 1;
+#X connect 8 0 13 0;
+#X connect 9 0 15 0;
+#X connect 9 1 7 0;
+#X connect 10 0 21 0;
+#X connect 11 0 19 0;
+#X connect 13 0 16 0;
+#X connect 14 0 11 2;
+#X connect 15 0 3 0;
+#X connect 16 0 11 0;
+#X connect 18 0 21 0;
+#X connect 18 1 20 0;
+#X connect 18 2 2 0;
+#X connect 19 0 12 0;
+#X connect 20 0 6 0;
+#X connect 21 0 9 0;
+#X connect 23 0 18 0;
+#X restore 129 112 pd filter_prelim;
+#X obj 129 199 biquad~;
+#N canvas 1 143 261 323 divide_by_a0 0;
+#X msg 71 44 \$2 \$3 \$4 \$5 \$6 \$1;
+#X obj 71 73 unpack f f f f f f;
+#X obj 71 180 /;
+#X obj 101 180 /;
+#X obj 131 180 /;
+#X obj 161 180 /;
+#X obj 191 180 /;
+#X obj 71 227 pack f f f f f;
+#X obj 71 117 * -1;
+#X obj 101 137 * -1;
+#X obj 71 16 inlet;
+#X obj 71 263 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 8 0;
+#X connect 1 1 9 0;
+#X connect 1 2 4 0;
+#X connect 1 3 5 0;
+#X connect 1 4 6 0;
+#X connect 1 5 6 1;
+#X connect 1 5 5 1;
+#X connect 1 5 4 1;
+#X connect 1 5 3 1;
+#X connect 1 5 2 1;
+#X connect 2 0 7 0;
+#X connect 3 0 7 1;
+#X connect 4 0 7 2;
+#X connect 5 0 7 3;
+#X connect 6 0 7 4;
+#X connect 7 0 11 0;
+#X connect 8 0 2 0;
+#X connect 9 0 3 0;
+#X connect 10 0 0 0;
+#X restore 129 156 pd divide_by_a0;
+#X obj 20 59 inlet~ signal;
+#X obj 129 64 inlet frequency;
+#X obj 238 84 inlet q;
+#X obj 129 243 outlet~;
+#X text 115 10 \$1 = centre frequency \; \$2 = 'Q';
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 283 49 pd LICENCE;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 7 0;
+#X connect 3 0 2 0;
+#X connect 4 0 2 0;
+#X connect 5 0 1 0;
+#X connect 6 0 1 1;

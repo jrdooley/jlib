@@ -1,0 +1,108 @@
+#N canvas 3 59 714 546 10;
+#X obj 26 188 *~ 0.3;
+#X obj 40 214 r~ \$0-fb;
+#X obj 45 263 delwrite~ \$0-a1 100;
+#X obj 26 289 delwrite~ \$0-a2 100;
+#X obj 209 193 clip -1 1;
+#X obj 209 215 * 0.4;
+#X obj 208 437 *~;
+#X obj 208 459 s~ \$0-fb;
+#X obj 338 188 * 5;
+#X obj 272 302 osc~;
+#X obj 272 324 *~;
+#X obj 272 346 +~;
+#X obj 272 368 vd~ \$0-a1;
+#X obj 337 413 *~ 1;
+#X obj 338 210 + 1;
+#X obj 338 303 osc~;
+#X obj 338 325 *~;
+#X obj 338 347 +~;
+#X obj 338 369 vd~ \$0-a2;
+#X obj 430 183 * 2;
+#X obj 26 236 +~;
+#X obj 336 519 outlet~;
+#X obj 26 109 inlet~;
+#X obj 354 165 \$2;
+#X obj 445 161 \$3;
+#X obj 431 229 lop~ 64;
+#X obj 271 258 sig~;
+#X obj 272 280 lop~ 64;
+#X obj 430 207 sig~;
+#X obj 338 255 sig~;
+#X obj 339 277 lop~ 64;
+#X obj 209 369 lop~ 64;
+#X obj 209 338 sig~;
+#X obj 228 170 \$1;
+#X obj 445 131 loadbang;
+#X obj 209 99 inlet feedback;
+#X obj 338 99 inlet rate;
+#X obj 430 98 inlet depth;
+#X text 28 11 CHORUS - courtesy of Obiwannabe;
+#X text 28 26 \$1 = feedback \; \$2 = rate \; \$3 = depth;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 370 41 pd LICENCE;
+#X connect 0 0 20 0;
+#X connect 1 0 20 1;
+#X connect 4 0 5 0;
+#X connect 5 0 32 0;
+#X connect 6 0 7 0;
+#X connect 8 0 14 0;
+#X connect 8 0 26 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 21 0;
+#X connect 13 0 6 1;
+#X connect 14 0 29 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 13 0;
+#X connect 19 0 28 0;
+#X connect 20 0 2 0;
+#X connect 20 0 3 0;
+#X connect 22 0 0 0;
+#X connect 23 0 8 0;
+#X connect 24 0 19 0;
+#X connect 25 0 16 1;
+#X connect 25 0 17 1;
+#X connect 25 0 10 1;
+#X connect 25 0 11 1;
+#X connect 26 0 27 0;
+#X connect 27 0 9 0;
+#X connect 28 0 25 0;
+#X connect 29 0 30 0;
+#X connect 30 0 15 0;
+#X connect 31 0 6 0;
+#X connect 32 0 31 0;
+#X connect 33 0 4 0;
+#X connect 34 0 24 0;
+#X connect 34 0 23 0;
+#X connect 34 0 33 0;
+#X connect 35 0 4 0;
+#X connect 36 0 8 0;
+#X connect 37 0 19 0;

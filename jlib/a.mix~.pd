@@ -1,0 +1,46 @@
+#N canvas 384 121 545 403 10;
+#X obj 105 124 vsl 30 120 0 1 0 0 empty empty empty 0 -9 0 10 -261234
+-1 -1 0 1;
+#X obj 57 311 *~;
+#X obj 72 287 line~;
+#X msg 72 266 \$1 10;
+#X obj 105 66 inlet;
+#X obj 56 67 inlet~;
+#X text 104 20 MIXER CHANNEL;
+#X obj 58 375 outlet~;
+#X text 202 52 MIXER CHANNEL creates a channel for a mutlitrack mixer.
+Inlet~ receives an audio signal \, whilst inlet receives fader values.
+The latter could be linked to a MIDI controller using ccin and ccr
+abstractions.;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 263 29 pd LICENCE;
+#X connect 0 0 3 0;
+#X connect 1 0 7 0;
+#X connect 2 0 1 1;
+#X connect 3 0 2 0;
+#X connect 4 0 0 0;
+#X connect 5 0 1 0;
+#X coords 0 -1 1 1 40 150 1 100 100;

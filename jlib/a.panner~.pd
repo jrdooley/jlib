@@ -1,0 +1,17 @@
+#N canvas 1 73 322 300 10;
+#X obj 25 10 inlet~;
+#X obj 25 188 *~;
+#X obj 90 188 *~;
+#X obj 24 241 outlet~;
+#X obj 90 240 outlet~;
+#X obj 78 11 inlet pan;
+#X obj 78 136 a.coscrossfade~;
+#X obj 78 37 clip 0 1;
+#X connect 0 0 1 0;
+#X connect 0 0 2 0;
+#X connect 1 0 3 0;
+#X connect 2 0 4 0;
+#X connect 5 0 7 0;
+#X connect 6 0 1 1;
+#X connect 6 1 2 1;
+#X connect 7 0 6 0;

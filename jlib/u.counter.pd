@@ -1,0 +1,56 @@
+#N canvas 653 428 398 285 10;
+#X obj 121 -19 cnv 15 100 60 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 25 163 i;
+#X obj 53 163 + 1;
+#X obj 25 208 + 1;
+#X obj 25 90 inlet;
+#X obj 174 93 inlet;
+#X obj 25 235 outlet;
+#X msg 71 136 0;
+#X text 218 91 inlet changes count range;
+#X text 143 0 COUNTER;
+#X obj 25 187 %;
+#X obj 25 114 route bang reset float;
+#X text 16 42 inlet accepts 3 arguments: 'bang' \, 'reset' and float.
+;
+#X text 71 58 float input changes the current count value.;
+#X obj 207 138 print;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 243 9 pd LICENCE;
+#X connect 1 0 2 0;
+#X connect 1 0 10 0;
+#X connect 2 0 1 1;
+#X connect 3 0 6 0;
+#X connect 4 0 11 0;
+#X connect 5 0 10 1;
+#X connect 5 0 14 0;
+#X connect 7 0 1 1;
+#X connect 10 0 3 0;
+#X connect 11 0 1 0;
+#X connect 11 1 7 0;
+#X connect 11 2 1 1;
+#X coords 0 0 1 1 40 60 0;

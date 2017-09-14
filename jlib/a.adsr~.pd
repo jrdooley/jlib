@@ -1,0 +1,178 @@
+#N canvas 276 87 1005 992 10;
+#X obj 24 65 inlet;
+#X obj 24 930 outlet~;
+#X obj 24 889 lop~;
+#X obj 24 771 sig~;
+#X obj 263 598 f \$3;
+#X obj 263 506 f \$2;
+#X obj 263 532 t b f;
+#X msg 490 554 0;
+#X obj 49 865 /;
+#X obj 490 529 t b f;
+#X obj 490 503 f \$4;
+#X obj 490 460 del;
+#X obj 302 241 \$1;
+#X obj 391 236 \$2;
+#X obj 373 290 +;
+#X obj 263 461 del;
+#X obj 302 191 t b b;
+#X msg 84 140 stop;
+#X obj 232 164 loadbang;
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 830 25 pd LICENCE;
+#X obj 302 60 inlet a;
+#X obj 429 58 inlet d;
+#X obj 556 57 inlet s;
+#X obj 681 57 inlet r;
+#X obj 302 102 t b f;
+#X obj 429 100 t b f;
+#X msg 49 843 1000 \$1;
+#X obj 24 116 t f b b b;
+#X obj 26 446 pack f \$1;
+#X obj 26 471 unpack f f;
+#X obj 334 124 s \$0-a;
+#X obj 320 218 r \$0-a;
+#X obj 461 122 s \$0-d;
+#X obj 86 420 r \$0-a;
+#X obj 288 483 r \$0-d;
+#X obj 84 163 s \$0-stop;
+#X obj 263 415 r \$0-stop;
+#X obj 490 416 r \$0-stop;
+#X obj 556 99 s \$0-s;
+#X obj 288 576 r \$0-s;
+#X obj 263 640 *;
+#X obj 93 496 s \$0-toMaths;
+#X obj 49 795 r \$0-toMaths;
+#X obj 295 554 s \$0-toMaths;
+#X obj 522 556 s \$0-toMaths;
+#X obj 24 234 s \$0-vel;
+#X obj 281 619 r \$0-vel;
+#X obj 26 397 r \$0-vel;
+#X obj 263 662 s \$0-toSig;
+#X obj 490 579 s \$0-toSig;
+#X obj 26 517 s \$0-toSig;
+#X obj 24 749 r \$0-toSig;
+#X text 24 714 Receives and processes all adsr data \, then generates
+the envelope;
+#X text 23 370 Attack;
+#X text 249 368 Decay & Sustain;
+#X text 486 367 Release;
+#X obj 409 211 r \$0-d;
+#X obj 681 99 s \$0-r;
+#X obj 515 480 r \$0-r;
+#X obj 373 314 s \$0-rDel;
+#X obj 508 439 r \$0-rDel;
+#X obj 302 314 s \$0-dDel;
+#X obj 281 438 r \$0-dDel;
+#X obj 64 186 s \$0-rTrig;
+#X obj 44 209 s \$0-dTrig;
+#X obj 245 392 r \$0-dTrig;
+#X obj 474 393 r \$0-rTrig;
+#X text 39 94 message trigger order forcing;
+#X obj 22 332 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 767 340 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 22 682 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 767 690 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 330 7 ADSR ENVELOPE GENERATOR;
+#X obj 302 264 * 1;
+#X obj 391 260 * 1;
+#X text 806 59 \$1 = attack time(ms) \; \$2 = decay time(ms) \; \$3
+= sustain \; \$4 = release time(ms);
+#X obj 302 82 clip 1 10000;
+#X obj 429 80 clip 1 10000;
+#X obj 556 79 clip 0 1;
+#X obj 681 79 clip 1 10000;
+#X obj 49 819 * 1;
+#X floatatom 62 887 5 0 0 0 - - -, f 5;
+#X connect 0 0 27 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 0;
+#X connect 4 0 40 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 6 1 43 0;
+#X connect 7 0 49 0;
+#X connect 8 0 2 1;
+#X connect 8 0 81 0;
+#X connect 9 0 7 0;
+#X connect 9 1 44 0;
+#X connect 10 0 9 0;
+#X connect 11 0 10 0;
+#X connect 12 0 73 0;
+#X connect 13 0 74 0;
+#X connect 14 0 59 0;
+#X connect 15 0 5 0;
+#X connect 16 0 12 0;
+#X connect 16 1 13 0;
+#X connect 17 0 35 0;
+#X connect 18 0 16 0;
+#X connect 20 0 76 0;
+#X connect 21 0 77 0;
+#X connect 22 0 78 0;
+#X connect 23 0 79 0;
+#X connect 24 0 16 0;
+#X connect 24 1 30 0;
+#X connect 25 0 16 0;
+#X connect 25 1 32 0;
+#X connect 26 0 8 0;
+#X connect 27 0 45 0;
+#X connect 27 1 64 0;
+#X connect 27 2 63 0;
+#X connect 27 3 17 0;
+#X connect 28 0 29 0;
+#X connect 29 0 50 0;
+#X connect 29 1 41 0;
+#X connect 31 0 12 1;
+#X connect 33 0 28 1;
+#X connect 34 0 5 1;
+#X connect 36 0 15 0;
+#X connect 37 0 11 0;
+#X connect 39 0 4 1;
+#X connect 40 0 48 0;
+#X connect 42 0 80 0;
+#X connect 46 0 40 1;
+#X connect 47 0 28 0;
+#X connect 51 0 3 0;
+#X connect 56 0 13 1;
+#X connect 58 0 10 1;
+#X connect 60 0 11 1;
+#X connect 62 0 15 1;
+#X connect 65 0 15 0;
+#X connect 66 0 11 0;
+#X connect 68 0 69 0;
+#X connect 70 0 71 0;
+#X connect 73 0 14 0;
+#X connect 73 0 61 0;
+#X connect 74 0 14 1;
+#X connect 76 0 24 0;
+#X connect 77 0 25 0;
+#X connect 78 0 38 0;
+#X connect 79 0 57 0;
+#X connect 80 0 26 0;

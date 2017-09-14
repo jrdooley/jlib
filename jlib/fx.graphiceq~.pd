@@ -1,0 +1,177 @@
+#N canvas 184 129 788 356 10;
+#N canvas 260 75 643 640 fft-analysis 0;
+#X obj 15 164 *~;
+#X obj 14 99 inlet~;
+#X obj 15 218 rfft~;
+#X obj 34 140 tabreceive~ \$0-hann;
+#X obj 14 353 *~;
+#X obj 55 353 *~;
+#X obj 15 8 block~ 512 4;
+#X text 85 88 The inlet~ now re-uses 3/4 of the previous block \, along
+with the 128 new samples.;
+#X text 221 141 window function as before.;
+#X obj 76 225 *~;
+#X obj 16 506 *~;
+#X obj 35 481 tabreceive~ \$0-hann;
+#X obj 76 283 /~ 768;
+#X text 98 301 divide by 3N/2 (factor of N because rfft and rifft aren't
+normalized \, and 3/2 is the gain of overlap-4 reconstruction when
+Hann window function is applied twice.);
+#X text 120 216 Just to show we're doing something \, we multiply each
+channel by a gain controlled by an array in the main window. The control
+is quartic-scaled for easy editing.;
+#X obj 77 251 *~;
+#X text 92 357 Multiply the (complex-valued) spectrum amplitudes by
+the (real-valued) gain-and-normalization-factor;
+#X obj 15 399 rifft~;
+#X text 89 396 Real-valued inverse Fourier transform. This uses only
+the first N/@ points of its inputs \, supplying the rest by symmerty
+(so it's OK that rfft~ obly puts out those N/2 points.) There's only
+one outlet because the output is real-valued.;
+#X obj 16 566 outlet~;
+#X text 88 499 Multiply by the Hann window function again \, necessary
+because the operation we performed might result in a signal that doesn't
+go smoothly to zero at both ends.;
+#X text 89 566 This repackages the output into 64-sample chunks for
+the parent window. Since we're operating with an overlap \, the outlet~
+object performs an overlapped sum of the blocks computed in this window.
+;
+#X text 129 8 block~ object specifies vector size of 512 and overlap
+four. This window now computes blocks of 512 samples at intervals of
+128 samples computed on the parent patch.;
+#X obj 75 196 tabreceive~ \$0-eq;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 2 1 5 0;
+#X connect 3 0 0 1;
+#X connect 4 0 17 0;
+#X connect 5 0 17 1;
+#X connect 9 0 15 0;
+#X connect 9 0 15 1;
+#X connect 10 0 19 0;
+#X connect 11 0 10 1;
+#X connect 12 0 4 1;
+#X connect 12 0 5 1;
+#X connect 15 0 12 0;
+#X connect 17 0 10 0;
+#X connect 23 0 9 0;
+#X connect 23 0 9 1;
+#X restore 9 236 pd fft-analysis;
+#N canvas 34 75 592 433 Hann-window 0;
+#N canvas 0 50 450 300 (subpatch) 0;
+#X array \$0-hann 512 float 0;
+#X coords 0 1 511 0 200 120 1;
+#X restore 293 249 graph;
+#X msg 171 263 0;
+#X obj 65 312 osc~;
+#X obj 65 264 samplerate~;
+#X obj 65 335 *~ -0.5;
+#X obj 65 358 +~ 0.5;
+#X obj 57 383 tabwrite~ \$0-hann;
+#X text 279 241 1;
+#X text 272 359 0;
+#X text 288 372 0;
+#X obj 65 288 / 512;
+#X obj 57 241 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 336 221 Hann window;
+#X text 113 310 period 512;
+#X text 90 215 recalculate Hann;
+#X text 125 230 window table;
+#X obj 57 146 loadbang;
+#X msg 79 179 \; pd dsp 1;
+#X text 40 27 The Hann window is now recomputed on 'loadbang' to make
+the file smaller (it doesn't have to be saved with the array.);
+#X text 474 375 511;
+#X connect 1 0 2 1;
+#X connect 2 0 4 0;
+#X connect 3 0 10 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 10 0 2 0;
+#X connect 11 0 3 0;
+#X connect 11 0 1 0;
+#X connect 11 0 6 0;
+#X connect 16 0 11 0;
+#X connect 16 0 17 0;
+#X restore 128 287 pd Hann-window;
+#N canvas 2 58 682 300 (subpatch) 0;
+#X array \$0-eq 256 float 3;
+#A 0 0.326668 0.326668 0.326668 0.326668 0.343501 0.360334 0.394001
+0.394001 0.410834 0.410834 0.427668 0.444501 0.478168 0.478168 0.495001
+0.511834 0.528667 0.562334 0.562334 0.579167 0.596001 0.629667 0.663334
+0.663334 0.680167 0.680167 0.680167 0.680167 0.713834 0.72225 0.730667
+0.764334 0.764334 0.764334 0.781167 0.781167 0.798 0.814834 0.831667
+0.831667 0.8485 0.8485 0.8485 0.8485 0.840084 0.831667 0.82325 0.814834
+0.798 0.764334 0.764334 0.730667 0.713834 0.705417 0.697001 0.680167
+0.680167 0.680167 0.646501 0.612834 0.612834 0.612834 0.612834 0.604417
+0.596001 0.596001 0.587584 0.579167 0.562334 0.545501 0.545501 0.537084
+0.528667 0.511834 0.511834 0.511834 0.495001 0.495001 0.495001 0.469751
+0.444501 0.444501 0.444501 0.444501 0.444501 0.427668 0.427668 0.427668
+0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668
+0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668
+0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668
+0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668
+0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.427668 0.436084
+0.444501 0.444501 0.444501 0.444501 0.444501 0.444501 0.452918 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334 0.461334
+0.461334 0.461334 0.461334 0.461334 0.410834 0.410834 0.410834 0.410834
+0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834
+0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834
+0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834
+0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834 0.410834
+0.410834 0.410834 0.410834 0.419251 0.427668 0.427668 0.427668 0.444501
+0.461334 0.461334 0.478168 0.495001 0.503417 0.511834 0.528667 0.528667
+0.545501 0.545501 0.596001 0.604417 0.713834 0.713834 0.764334 0.798
+0.814834 0.831667 0.8485 0.865334 0.882167 0.882167 0.882167 0.882167
+;
+#X coords 0 1 256 -0.01 512 60 2 0 0;
+#X restore 106 133 graph;
+#X obj 8 143 inlet~;
+#X obj 10 315 outlet~;
+#X text 3 26 GRAPHIC EQUALISER;
+#X obj 581 104 bng 15 250 50 0 empty empty RESET 17 7 0 10 -262144
+-1 -1;
+#X msg 128 233 const 1;
+#N canvas 750 115 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 353 39 pd LICENCE;
+#X obj 128 262 s \$0-eq;
+#X text 591 191 22kHz;
+#X text 346 191 11kHz;
+#X text 224 191 5.5kHz;
+#X text 158 191 2.25kHz;
+#X text 123 191 1kHz;
+#X connect 0 0 4 0;
+#X connect 3 0 0 0;
+#X connect 6 0 7 0;
+#X connect 7 0 9 0;
+#X coords 0 -1 1 1 530 120 2 100 100;

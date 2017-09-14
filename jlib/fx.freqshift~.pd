@@ -1,0 +1,87 @@
+#N canvas 1 68 491 576 10;
+#X obj 122 413 phasor~;
+#X obj 122 466 cos~;
+#X obj 168 464 cos~;
+#X obj 57 109 inlet~;
+#X obj 112 497 *~;
+#X obj 59 547 outlet~;
+#X obj 59 495 *~;
+#X obj 168 444 +~ 0.25;
+#X obj 121 109 inlet frequencyShift;
+#X obj 273 276 osc~;
+#X obj 274 301 *~;
+#X obj 122 387 *~;
+#X obj 274 109 inlet rate;
+#X obj 274 228 lop~ 64;
+#X obj 273 330 +~;
+#X obj 307 256 sig~ 0;
+#X obj 307 278 lop~ 64;
+#X obj 58 413 hilbert~;
+#X obj 375 250 -;
+#X msg 375 228 1 \$1;
+#X obj 375 295 lop~ 64;
+#X obj 375 109 inlet amount;
+#X obj 375 205 clip 0 1;
+#X text 55 7 FREQUENCY SHIFTER WITH WARBLE EFFECT;
+#X obj 375 273 sig~ 1;
+#X obj 391 175 \$3;
+#X obj 121 363 sig~ \$1;
+#X obj 274 206 sig~ \$2;
+#X obj 391 153 loadbang;
+#X text 54 32 \$1 = frequency shift (Hz) \; \$2 = warble rate (Hz)
+\; \$3 = warble amount (0-1);
+#N canvas 751 110 503 525 LICENCE 0;
+#X text 63 55 Attribution 4 International (CC BY 4.0) This is a human-readable
+summary of (and not a substitute for) the license. Disclaimer This
+license is acceptable for Free Cultural Works.;
+#X text 63 131 You are free to: Share - copy and redistribute the material
+in any medium or format.;
+#X text 63 181 Adapt - remix \, transform \, and build upon the material
+for any purpose \, even commercially.;
+#X text 63 231 The licensor cannot revoke these freedoms as long as
+you follow the license terms. Under the following terms:;
+#X text 63 281 Attribution - You must give appropriate credit \, provide
+a link to the license \, and indicate if changes were made. You may
+do so in any reasonable manner \, but not in any way that suggests
+the licensor endorses you or your use.;
+#X text 63 357 No additional restrictions - You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.;
+#X text 63 420 Notices: You do not have to comply with the license
+for elements of the material in the public domain or where your use
+is permitted by an applicable exception or limitation. No warranties
+are given. The license may not give you all of the permissions necessary
+for your intended use. For example \, other rights such as publicity
+\, privacy \, or moral rights may limit how you use the material.;
+#X text 64 19 J.R.Dooley \, 2013;
+#X restore 383 59 pd LICENCE;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 1 0 6 1;
+#X connect 2 0 4 1;
+#X connect 3 0 17 0;
+#X connect 4 0 5 0;
+#X connect 6 0 5 0;
+#X connect 7 0 2 0;
+#X connect 8 0 26 0;
+#X connect 9 0 10 0;
+#X connect 10 0 14 0;
+#X connect 11 0 0 0;
+#X connect 12 0 27 0;
+#X connect 13 0 9 0;
+#X connect 14 0 11 1;
+#X connect 15 0 16 0;
+#X connect 16 0 10 1;
+#X connect 17 0 6 0;
+#X connect 17 1 4 0;
+#X connect 18 0 24 0;
+#X connect 19 0 18 0;
+#X connect 20 0 14 1;
+#X connect 21 0 22 0;
+#X connect 22 0 15 0;
+#X connect 22 0 19 0;
+#X connect 24 0 20 0;
+#X connect 25 0 22 0;
+#X connect 26 0 11 0;
+#X connect 27 0 13 0;
+#X connect 28 0 25 0;
